@@ -1,3 +1,4 @@
+import math
 def best_score(arr, n):
     if len(arr) == 0:
         return 0
@@ -11,8 +12,10 @@ def required_points(arr, n):
 
 def check(stack1, stack2, max_stack1, sum_stack2):
     global count
-    # print(stack1, stack2,max_stack1, round(sum_stack2 / len(stack2)))
-    if stack1 and max_stack1 <= (round (sum_stack2 / len(stack2))):
+    # print(stack1, stack2,max_stack1, math.ceil(sum_stack2 / len(stack2)))
+    if(len(stack1) != len(stack2)):
+        print(1/0)
+    if stack1 and max_stack1 <= (math.ceil (sum_stack2 / len(stack2))):
         count += len(stack1)
         stack1.clear()
         stack2.clear()
@@ -26,14 +29,13 @@ all_scores = []
 my_best_score = best_score(list(map(int, input().split())), 4)
 for _ in range(users - 1):
     scores = list(map(int, input().split()))
-    # other_best_score = best_score(scores, 4)
-    # if other_best_score > my_best_score:
-    #     count += 1
-    # else:
-    all_scores.append(scores)
+    other_best_score = best_score(scores, 4)
+    if other_best_score > my_best_score:
+        count += 1
+    else:
+        all_scores.append(scores)
         
         
-
 arr = required_points(all_scores, my_best_score)
 arr.sort()
 n = len(arr)
